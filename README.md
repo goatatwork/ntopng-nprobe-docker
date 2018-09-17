@@ -20,7 +20,7 @@ Networking:
 
 #### docker-compose Notes
 
-Both the **ntopng** and the **nprobe** services are built when the services start. The `docker-compose.yml` file is using `command: ["/etc/ntopng/ntopng.conf"]` and `command: ["/etc/nprobe/nprobe.conf"]` to tell ntop and nprobe, respectively, to look at the configuration files for their configs. If you want to provide your own startup options, provide them as an array to the `command:` configuration value. Example: to have nprobe not look at its config file, and instead start with the same options, change `command:` from this:
+Both the **ntopng** and the **nprobe** services are built when the services start. The `docker-compose.yml` file is using `command: ["/etc/ntopng/ntopng.conf"]` and `command: ["/etc/nprobe/nprobe.conf"]` to tell ntop and nprobe, respectively, to look at the configuration files for their configs. If you want to provide your own startup options, either change the config files before building, or provide them as an array to the `command:` configuration value. Example: To start nprobe with command line options instead of from the config file, change:
 
 ```
 command: ["/etc/nprobe/nprobe.conf"]
