@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  ntopng:
+    driver: "bridge"
+
+volumes:
+  ntopng-data:
+
+services:
+  nprobe:
+    container_name: nprobe
+    image: goatatwork/nprobe:0.1
+    build:
+      context: ./docker/nprobe
+      dockerfile: Dockerfile
+    networks:
+      - ntopng
+    ports:
+      - "2055:2055/udp"
+    command: ["/etc/nprobe/nprobe-none.conf"]
+  ntopng:
+    container_name: ntopng
+    image: goatatwork/ntopng:0.1
+    build:
+      context: ./docker/ntopng
+      dockerfile: Dockerfile
+    volumes:
+      - ntopng-data:/var/lib/ntopng
+    networks:
+      - ntopng
+    ports:
+      - "3000:3000"
+    command: ["/etc/ntopng/ntopng.conf"]
+    depends_on:
+      - redis
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      - ntopng
