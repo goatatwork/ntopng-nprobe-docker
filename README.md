@@ -1,5 +1,7 @@
 ## Ntop+Nprobe
 
+![ntop+nprobe+cacti](docker-ntop.jpg)
+
 #### Mission
 
 A dockerized ntopng install that talks to an nProbe instance. The purpose of the nProbe instance to provide a "flow sink" for anything on the network that I point to it. The end result should be that anytime I point flow data to the nProbe collector, I can view it in ntopng.
@@ -11,7 +13,7 @@ A dockerized ntopng install that talks to an nProbe instance. The purpose of the
 - redis
 - cacti
 
-Networking:
+#### Networking:
 
 - **ntopng** is listening on 3000/TCP for connections to the web front end. This should be exposed to the world via 3000/TCP or some other TCP port of your choosing. This can be set in the docker-compose.yml file.
 - **nprobe** is listening on 2055/UDP for incoming flow data. This should be exposed to the world via 2055/UDP or some other UDP port of your chosing.
