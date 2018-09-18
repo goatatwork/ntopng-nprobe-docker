@@ -6,6 +6,7 @@ networks:
 
 volumes:
   ntopng-data:
+  cacti_backups:
 
 services:
   nprobe:
@@ -39,3 +40,14 @@ services:
     image: redis:alpine
     networks:
       - ntopng
+  cacti:
+    container_name: cacti
+    image: quantumobject/docker-cacti
+    environment:
+      TZ: "America/Chicago"
+    volumes:
+      - cacti_backups:/var/backups
+    networks:
+      - ntopng
+    ports:
+      - "8080:80"
