@@ -44,7 +44,7 @@ services:
     container_name: cacti
     image: quantumobject/docker-cacti
     environment:
-      TZ: "America/Chicago"
+      - TZ=America/Chicago
     volumes:
       - cacti_backups:/var/backups
     networks:
