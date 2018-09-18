@@ -9,12 +9,15 @@ A dockerized ntopng install that talks to an nProbe instance. The purpose of the
 - nprobe
 - ntopng
 - redis
+- cacti
 
 Networking:
 
-- **ntopng** is listening on 3000/TCP for connections to the web front end. This should be exposed to the world via 3000/TCP or some other TCP port of your choosing.
+- **ntopng** is listening on 3000/TCP for connections to the web front end. This should be exposed to the world via 3000/TCP or some other TCP port of your choosing. This can be set in the docker-compose.yml file.
 - **nprobe** is listening on 2055/UDP for incoming flow data. This should be exposed to the world via 2055/UDP or some other UDP port of your chosing.
 - **nprobe** is listening internally, on the ***ntopng*** network, on 5556/TCP. This is the port that **ntopng** will use to get flow data.
+- **redis** is listening internally, on the ***ntopng*** network, on 6379/TCP.
+- **cacti** is listening on 8080/TCP for connections to the web front end. This should be exposed to the world via 8080/TCP or some other TCP port of your choosing. This can be set in the docker-compose.yml file.
 
 **ntopng** does not need host networking in this case because it is only paying attention to what is going on over at `--interface="tcp://nprobe:5556"`, **nprobe**'s open 5556/TCP on the ***ntopng*** network.
 
